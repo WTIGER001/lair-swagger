@@ -1,0 +1,437 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Lair API",
+    "description": "API for running coading lair actions",
+    "version": "1.0.0"
+  },
+  "host": "api.example.com",
+  "basePath": "/v1",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/workspaces": {
+      "get": {
+        "summary": "Returns a list workspaces for the calling user.",
+        "description": "The users name is expected to be in a JWT.",
+        "operationId": "getWorkspaces",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Workspace"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/workspaces/{id}": {
+      "get": {
+        "summary": "Returns a workspace",
+        "operationId": "getWorkspaceById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "User is not authorized to perform this action"
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a workspace",
+        "operationId": "putWorkpaceById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "workspace",
+            "description": "Workspace to save",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "User is not authorized to perform this action"
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Updates a workspace",
+        "operationId": "postWorkpaceById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "workspace",
+            "description": "Workspace to save",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "User is not authorized to perform this action"
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a workspace",
+        "operationId": "deleteWorkpaceById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "User is not authorized to perform this action"
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/workspaces/{id}/launch": {
+      "post": {
+        "summary": "Requests a workspace to be launched",
+        "operationId": "launchWorkpaceById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceStatus"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "User is not authorized to perform this action"
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Requests a workspace to be launched",
+        "operationId": "getWorkpaceLaunchStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceStatus"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "User is not authorized to perform this action"
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Stops a launched workspace",
+        "operationId": "cancelLaunch",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "commitChanges",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceStatus"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "401": {
+            "description": "Unauthenticated"
+          },
+          "403": {
+            "description": "User is not authorized to perform this action"
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Workspace": {
+      "description": "Workspace",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Workspace ID",
+          "type": "string"
+        },
+        "name": {
+          "description": "Workspace ID",
+          "type": "string"
+        },
+        "description": {
+          "description": "Workspace ID",
+          "type": "string"
+        },
+        "cpus": {
+          "description": "Amount of CPU being requested to run this algorithm",
+          "type": "number",
+          "format": "double"
+        },
+        "memory": {
+          "description": "Amount of Memory in MBs being requested",
+          "type": "number",
+          "format": "double"
+        },
+        "shared": {
+          "description": "If the workpsace is shared for others to clone",
+          "type": "boolean"
+        },
+        "image": {
+          "description": "Image of the workspace",
+          "type": "string"
+        },
+        "dockerImage": {
+          "description": "Full docker image name. Including the repo",
+          "type": "string"
+        },
+        "workpsaceLocation": {
+          "description": "Location of the workspace volume",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Timeout, in minutes, that a workspace will be kept active, default 30 min",
+          "type": "number",
+          "format": "integer"
+        }
+      }
+    },
+    "WorkspaceStatus": {
+      "description": "Workspace Status",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Workspace ID / session id",
+          "type": "string"
+        },
+        "status": {
+          "description": "Amount of CPU being requested to run this algorithm",
+          "type": "string",
+          "enum": [
+            "none",
+            "scheduling",
+            "starting",
+            "running",
+            "stopping"
+          ]
+        },
+        "url": {
+          "description": "URL to the running instance",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

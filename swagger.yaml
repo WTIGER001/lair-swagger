@@ -13,23 +13,24 @@ paths:
     get:
       summary: Returns a list workspaces for the calling user. 
       description: The users name is expected to be in a JWT.
+      operationId: getWorkspaces
       produces:
         - application/json
       responses:
         200:
           description: OK
           schema: 
-            type: object
-            properties:
-              user:
-                type: string
-              workspaces:
-                type: array
-                items:
-                  $ref: '#/definitions/Workspace'
+            type: array
+            items:
+              $ref: '#/definitions/Workspace'
+        500:
+          description: Internal Server Error
+          schema: 
+            type: string
   /workspaces/{id}:
     get:
       summary: Returns a workspace 
+      operationId: getWorkspaceById
       produces:
         - application/json
       parameters:
@@ -285,6 +286,5 @@ definitions:
         enum: [none, scheduling, starting, running, stopping]
       url:
         description: URL to the running instance
-        type: number
-        format: double   
+        type: string
         
